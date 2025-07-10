@@ -170,8 +170,7 @@ canvas.addEventListener("touchmove", (e) => {
         particles.push(new Particle(fruit.x, fruit.y, color));
       }
       if (fruit.isBomb) {
-        alert("Game Over!\nFinal Score: " + score);
-        location.reload();
+        showGameOverModal(score);
       } else {
         score++;
         document.getElementById("score").textContent = "Score: " + score;
@@ -199,9 +198,13 @@ canvas.addEventListener("mousemove", (e) => {
   fruits.forEach(fruit => {
     if (!fruit.isHit && fruit.isSliced(x, y)) {
       fruit.isHit = true;
+      // Particle effect on slice (for mouse slice)
+      for (let i = 0; i < 18; i++) {
+        let color = fruit.isBomb ? "#ff3333" : "#7fff00";
+        particles.push(new Particle(fruit.x, fruit.y, color));
+      }
       if (fruit.isBomb) {
-        alert("Game Over!\nFinal Score: " + score);
-        location.reload();
+        showGameOverModal(score);
       } else {
         score++;
         document.getElementById("score").textContent = "Score: " + score;
@@ -209,6 +212,24 @@ canvas.addEventListener("mousemove", (e) => {
     }
   });
 });
+
+// Show Game Over Modal (moved to global scope)
+function showGameOverModal(finalScore) {
+  const modal = document.getElementById('gameOverModal');
+  const scoreDiv = document.getElementById('finalScore');
+  scoreDiv.textContent = 'Score: ' + finalScore;
+  modal.style.display = 'flex';
+  // Prevent further game interaction
+  canvas.style.pointerEvents = 'none';
+}
+
+// Play Again button event (moved to global scope)
+const playAgainBtn = document.getElementById('playAgainBtn');
+if (playAgainBtn) {
+  playAgainBtn.onclick = function() {
+    location.reload();
+  };
+}
 
 
 

@@ -1,3 +1,19 @@
+/* Game Over Modal Styles */
+#gameOverModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+#gameOverModal.show {
+  display: flex;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,6 +34,22 @@ body {
   left: 50%;
   transform: translateX(-50%);
   font-size: 24px;
+  z-index: 10;
+}
+#finalScore {
+  font-size: 36px;
+  margin-top: 20px;
+}
+#restartButton {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#restartButton:hover {
   z-index: 10;
 }
 
