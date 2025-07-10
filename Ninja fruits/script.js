@@ -55,11 +55,20 @@ if (startBtn) {
   startBtn.onclick = function() {
     openingScreen.style.display = "none";
     gameContainer.style.display = "block";
+
+    // Set container height to window.innerHeight for mobile viewport fix
+    gameContainer.style.height = window.innerHeight + "px";
+
+    // Set canvas size to full window size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     // Start/reset game
     score = 0;
     document.getElementById("score").textContent = "Score: 0";
     fruits = [];
     slices = [];
+
     setTimeout(() => {
       // Prevent double interval if user restarts
       if (window._fruitInterval) clearInterval(window._fruitInterval);
@@ -68,6 +77,13 @@ if (startBtn) {
     }, 100);
   };
 }
+
+// Update container height and canvas size on window resize
+window.addEventListener('resize', () => {
+  gameContainer.style.height = window.innerHeight + "px";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
 // Load fruit and bomb images
 const fruitImages = [
