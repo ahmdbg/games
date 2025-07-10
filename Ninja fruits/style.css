@@ -1,5 +1,4 @@
 
-
 body {
   margin: 0;
   background: #222;
@@ -8,22 +7,11 @@ body {
   text-align: center;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-  min-width: 100vw;
-  box-sizing: border-box;
-}
-
-
 #openingScreen {
   position: relative;
-  width: 90vw;
-  max-width: 800px;
+  width: 800px;
   margin: 40px auto 0 auto;
 }
-
 
 #openingCanvas {
   display: block;
@@ -31,11 +19,6 @@ html, body {
   background: #333;
   border: 2px solid #fff;
   z-index: 1;
-  width: 100%;
-  height: auto;
-  max-width: 800px;
-  max-height: 70vw;
-  aspect-ratio: 4/3;
 }
 
 #startBtn {
@@ -53,48 +36,35 @@ html, body {
   z-index: 2;
   box-shadow: 0 4px 16px #0008;
   transition: background 0.2s;
-  width: 70vw;
-  max-width: 350px;
-  min-width: 160px;
 }
 #startBtn:hover {
   background: #ff8800;
 }
 
-
 #gameContainer {
-  width: 90vw;
-  max-width: 800px;
+  width: 800px;
   margin: 0 auto;
 }
-
 
 #gameCanvas {
   display: block;
   margin: 0 auto;
   background: #333;
   border: 2px solid #fff;
-  width: 100%;
-  height: auto;
-  max-width: 800px;
-  max-height: 70vw;
-  aspect-ratio: 4/3;
 }
-
 
 #score {
-  font-size: clamp(20px, 5vw, 24px);
+  font-size: 24px;
   margin-bottom: 10px;
 }
-
 
 /* Modal styles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -104,19 +74,17 @@ html, body {
 
 .modal-content {
   background-color: #222;
-  padding: 8vw 4vw;
+  padding: 30px 40px;
   border-radius: 12px;
   text-align: center;
   color: white;
   box-shadow: 0 0 20px #ffb347;
-  max-width: 90vw;
 }
-
 
 #playAgainBtn {
   margin-top: 20px;
-  font-size: 1.2rem;
-  padding: 10px 28px;
+  font-size: 1.5rem;
+  padding: 12px 36px;
   background: #ffb347;
   color: #222;
   border: none;
@@ -124,38 +92,8 @@ html, body {
   cursor: pointer;
   box-shadow: 0 4px 16px #0008;
   transition: background 0.2s;
-  width: 60vw;
-  max-width: 250px;
-  min-width: 120px;
 }
 
 #playAgainBtn:hover {
   background: #ff8800;
-}
-
-@media (max-width: 600px) {
-  #openingScreen, #gameContainer {
-    width: 98vw;
-    max-width: 100vw;
-    margin: 0 auto;
-  }
-  #openingCanvas, #gameCanvas {
-    max-width: 100vw;
-    max-height: 80vw;
-    aspect-ratio: 4/3;
-  }
-  .modal-content {
-    padding: 6vw 2vw;
-    font-size: 1.1rem;
-  }
-  #score {
-    font-size: 6vw;
-  }
-  #startBtn, #playAgainBtn {
-    font-size: 1.1rem;
-    padding: 10px 10vw;
-    min-width: 80px;
-    width: 80vw;
-    max-width: 90vw;
-  }
 }

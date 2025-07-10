@@ -259,40 +259,6 @@ canvas.addEventListener("mousemove", (e) => {
   });
 });
 
-// Tambahkan event listener untuk sentuhan di perangkat mobile
-canvas.addEventListener("touchmove", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  // Ambil posisi sentuhan pertama
-  const touch = e.touches[0];
-  const touchX = touch.clientX - rect.left;
-  const touchY = touch.clientY - rect.top;
-
-  slices.push({
-    x1: touchX - 10,
-    y1: touchY - 10,
-    x2: touchX,
-    y2: touchY
-  });
-
-  fruits.forEach(fruit => {
-    if (!fruit.isHit && fruit.isSliced(touchX, touchY)) {
-      fruit.isHit = true;
-      fruit.sliceEffect = true;
-      fruit.sliceFrame = 0;
-      if (fruit.isBomb) {
-        setTimeout(() => {
-          showGameOverModal();
-        }, 300);
-      } else {
-        score += 1;
-        document.getElementById("score").textContent = "Score: " + score;
-      }
-    }
-  });
-  // Mencegah scroll saat main game di HP
-  e.preventDefault();
-}, { passive: false });
-
 // Modal elements
 const gameOverModal = document.getElementById("gameOverModal");
 const finalScoreText = document.getElementById("finalScore");
