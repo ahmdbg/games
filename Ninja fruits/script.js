@@ -1,4 +1,5 @@
 
+
 // --- Opening Screen Logic ---
 const openingScreen = document.getElementById("openingScreen");
 const openingCanvas = document.getElementById("openingCanvas");
@@ -8,6 +9,28 @@ const gameContainer = document.getElementById("gameContainer");
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
+// Responsive canvas resize
+function resizeCanvases() {
+  // Opening Canvas
+  if (openingCanvas) {
+    const parent = openingCanvas.parentElement;
+    const width = Math.min(parent.offsetWidth, 800);
+    openingCanvas.width = width;
+    openingCanvas.height = width * 0.75; // 4:3 aspect ratio
+  }
+  // Game Canvas
+  if (canvas) {
+    const parent = canvas.parentElement;
+    const width = Math.min(parent.offsetWidth, 800);
+    canvas.width = width;
+    canvas.height = width * 0.75; // 4:3 aspect ratio
+  }
+}
+
+window.addEventListener('resize', resizeCanvases);
+window.addEventListener('orientationchange', resizeCanvases);
+resizeCanvases();
 
 let score = 0;
 let fruits = [];
@@ -258,6 +281,40 @@ canvas.addEventListener("mousemove", (e) => {
     }
   });
 });
+
+// Tambahkan event listener untuk sentuhan di perangkat mobile
+canvas.addEventListener("touchmove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  // Ambil posisi sentuhan pertama
+  const touch = e.touches[0];
+  const touchX = touch.clientX - rect.left;
+  const touchY = touch.clientY - rect.top;
+
+  slices.push({
+    x1: touchX - 10,
+    y1: touchY - 10,
+    x2: touchX,
+    y2: touchY
+  });
+
+  fruits.forEach(fruit => {
+    if (!fruit.isHit && fruit.isSliced(touchX, touchY)) {
+      fruit.isHit = true;
+      fruit.sliceEffect = true;
+      fruit.sliceFrame = 0;
+      if (fruit.isBomb) {
+        setTimeout(() => {
+          showGameOverModal();
+        }, 300);
+      } else {
+        score += 1;
+        document.getElementById("score").textContent = "Score: " + score;
+      }
+    }
+  });
+  // Mencegah scroll saat main game di HP
+  e.preventDefault();
+}, { passive: false });
 
 // Modal elements
 const gameOverModal = document.getElementById("gameOverModal");
