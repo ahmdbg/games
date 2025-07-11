@@ -1,6 +1,11 @@
 
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
+// Sound effects (gunakan file lokal, pastikan file slice.mp3 dan gameover.mp3 ada di folder ini)
+const sliceSfx = new Audio("./sound/slice.mp3"); // slice sound
+const gameOverSfx = new Audio("./sound/gameover.mp3"); // game over sound
 
 let score = 0;
 let fruits = [];
@@ -170,8 +175,10 @@ canvas.addEventListener("touchmove", (e) => {
         particles.push(new Particle(fruit.x, fruit.y, color));
       }
       if (fruit.isBomb) {
+        gameOverSfx.currentTime = 0; gameOverSfx.play();
         showGameOverModal(score);
       } else {
+        sliceSfx.currentTime = 0; sliceSfx.play();
         score++;
         document.getElementById("score").textContent = "Score: " + score;
       }
@@ -204,8 +211,10 @@ canvas.addEventListener("mousemove", (e) => {
         particles.push(new Particle(fruit.x, fruit.y, color));
       }
       if (fruit.isBomb) {
+        gameOverSfx.currentTime = 0; gameOverSfx.play();
         showGameOverModal(score);
       } else {
+        sliceSfx.currentTime = 0; sliceSfx.play();
         score++;
         document.getElementById("score").textContent = "Score: " + score;
       }
